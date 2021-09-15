@@ -1,24 +1,22 @@
-# README
+# Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Design
 
-Things you may want to cover:
+User
+  password
+  username
+  email
+  name
 
-* Ruby version
+Post
+  user
+  body
 
-* System dependencies
 
-* Configuration
+## Requirements
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Rspec
+- Sign in
+- Ability to CRUD posts
+- News page
+- Follows
