@@ -11,6 +11,7 @@ User
 Post
   user
   body
+  title
 
 
 ## Requirements
