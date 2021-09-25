@@ -19,5 +19,5 @@ Post
 - Rspec
 - Sign in
 - Ability to CRUD posts
-- News page
+- News feed
 - Follows
