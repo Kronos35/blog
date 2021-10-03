@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Post do
   context 'with valid attributes' do
-    subject(:post) { FactoryBot.build :post }
+    subject(:post) { build :post }
 
     before { post.valid? }
 
