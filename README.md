@@ -13,6 +13,9 @@ Post
   body
   title
 
+Follow
+  user
+  recipient
 
 ## Requirements
 

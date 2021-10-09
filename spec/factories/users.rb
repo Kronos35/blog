@@ -3,6 +3,11 @@ FactoryBot.define do
     name { 'Antonio' }
     email { 'antonio@mock.com' }
     password { '$eCret123' }
+
+    trait :sequential_user do
+      sequence(:name) { |n| "User #{n}" }
+      sequence(:email) { |n| "user#{n}@test.com" }
+    end
   end
 
   factory :tony_stark, class: 'User' do
