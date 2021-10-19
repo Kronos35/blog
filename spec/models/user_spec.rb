@@ -50,7 +50,7 @@ describe User, '#posts' do
   end
 
   context 'when other user has posts' do
-    let!(:user_posts) { create_list :post, 3, user: create(:tony_stark) }
+    before { create_list :post, 3, user: create(:tony_stark) }
 
     it 'returns an empty array' do
       expect(posts).to be_empty
@@ -206,7 +206,6 @@ end
 
 describe User, '#followed_posts' do
   let(:user) { create :user }
-
   let(:tony_stark) { create :tony_stark }
   let(:steve_rogers) { create :steve_rogers }
 
@@ -257,6 +256,10 @@ describe User, '#followed_posts' do
 
       it 'returns posts by followed user' do
         expect(user.followed_posts).to match_array expected_posts
+      end
+
+      it 'does not create any new follows' do
+        expect { user.followed_posts }.not_to change(Follow, :count)
       end
     end
 

@@ -5,6 +5,8 @@ class CreateFollows < ActiveRecord::Migration[5.2]
       t.references :recipient, foreign_key: { to_table: :users }
 
       t.timestamps
+
+      t.index %w[user_id recipient_id], unique: true
     end
   end
 end

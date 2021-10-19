@@ -10,7 +10,7 @@ describe 'Posts', '#GET /index' do
       sign_in user
     end
 
-    context 'when the user follows another user' do
+    context 'when the user follows another user with posts' do
       let(:tony_stark) { create :tony_stark }
 
       before do
@@ -23,7 +23,7 @@ describe 'Posts', '#GET /index' do
 
       it 'shows posts of the followed users' do
         tony_stark.posts.each do |post|
-          expect(response.body).to have_selector "##{post.id}"
+          expect(response.body).to have_selector "#post-#{post.id}"
         end
       end
     end
@@ -38,7 +38,7 @@ describe 'Posts', '#GET /index' do
 
       it 'shows his own posts' do
         user.posts.each do |post|
-          expect(response.body).to have_selector "##{post.id}"
+          expect(response.body).to have_selector "#post-#{post.id}"
         end
       end
     end
@@ -47,7 +47,6 @@ describe 'Posts', '#GET /index' do
       let(:tony_stark) { create :tony_stark }
 
       before do
-        user.follow! tony_stark
         create_list :post, 3, user: tony_stark
         req_index
       end
@@ -56,7 +55,7 @@ describe 'Posts', '#GET /index' do
 
       it 'displays no posts at all' do
         Post.all.each do |post|
-          expect(response.body).not_to have_selector "##{post.id}"
+          expect(response.body).not_to have_selector "#post-#{post.id}"
         end
       end
     end

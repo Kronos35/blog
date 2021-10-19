@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :follows, dependent: :destroy
-  has_many :followings, class_name: 'Follow', foreign_key: 'recipient_id', dependent: :destroy
+  has_many :followings, class_name: 'Follow', foreign_key: 'recipient_id', dependent: :destroy, inverse_of: :user
   has_many :followers, class_name: 'User', through: :followings, source: :user
   has_many :followed_users, class_name: 'User', through: :follows, source: :recipient
 
@@ -35,6 +35,6 @@ class User < ApplicationRecord
   end
 
   def followed_posts
-    Post.where(user: followed_users.push(self))
+    Post.where(user: followed_users.to_a.push(self))
   end
 end
