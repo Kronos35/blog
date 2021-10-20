@@ -3,19 +3,19 @@
 ## Design
 
 User
-  password
-  username
-  email
-  name
+- password
+- username
+- email
+- name
 
 Post
-  user
-  body
-  title
+- user
+- body
+- title
 
 Follow
-  user
-  recipient
+- user
+- recipient
 
 ## Requirements
 
