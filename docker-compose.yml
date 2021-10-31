@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  dev:
+    image: ruby:3.0
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+    container_name: blog
+    hostname: test.host
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    # For using pry
+    stdin_open: true
+    tty: true
+
+volumes:
+  gems:
