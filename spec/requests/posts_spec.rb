@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'Posts', '#GET /index' do
   subject(:req_index) { get '/posts' }
 
+  before {}
+
   context 'when the user is signed in' do
     let(:user) { create :user }
 

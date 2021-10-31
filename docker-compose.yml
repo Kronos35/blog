@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./docker/dev/Dockerfile
     container_name: blog
-    hostname: example.com
+    hostname: test.host
     environment:
       RAILS_ENV: development
     volumes:

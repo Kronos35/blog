@@ -3,7 +3,6 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    debugger
     @posts = current_user.followed_posts
   end
 
