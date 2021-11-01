@@ -3,8 +3,6 @@ require 'rails_helper'
 describe 'Posts', '#GET /index' do
   subject(:req_index) { get '/posts' }
 
-  before {}
-
   context 'when the user is signed in' do
     let(:user) { create :user }
 
@@ -68,6 +66,43 @@ describe 'Posts', '#GET /index' do
       req_index
     end
 
+    it { expect(response).not_to be_successful }
+
+    it 'redirects to sign in page' do
+      expect(response).to redirect_to new_user_session_path
+    end
+  end
+end
+
+describe 'Posts', '#PATCH /destroy' do
+  subject(:req_destroy) { delete post_path(post) }
+
+  context 'when the user is signed in' do
+    let(:user) { create :user }
+
+    before do
+      sign_in user
+    end
+
+    context 'while the post belongs to user' do
+      let!(:post) { create :post, user: user }
+
+      it 'deletes the post' do
+        expect { req_destroy }.to change(Post, :count).from(1).to(0)
+      end
+    end
+
+    context 'while the post does not belong to user' do
+      let!(:post) { create :post, user: create(:steve_rogers) }
+
+      it 'does not delete the post' do
+        expect { req_destroy }.to raise_error(ActiveRecord::RecordNotFound)
+        expect(Post.count).to eq 1
+      end
+    end
+  end
+
+  context 'when no user is signed in' do
     it { expect(response).not_to be_successful }
 
     it 'redirects to sign in page' do
