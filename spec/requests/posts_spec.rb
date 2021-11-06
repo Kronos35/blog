@@ -75,7 +75,7 @@ describe 'Posts', '#GET /index' do
 end
 
 describe 'Posts', '#PATCH /destroy' do
-  subject(:req_destroy) { delete post_path(post) }
+  subject(:req_destroy) { delete(post_path(post)) }
 
   context 'when the user is signed in' do
     let(:user) { create :user }
@@ -103,6 +103,10 @@ describe 'Posts', '#PATCH /destroy' do
   end
 
   context 'when no user is signed in' do
+    let!(:post) { create :post }
+
+    before { req_destroy }
+
     it { expect(response).not_to be_successful }
 
     it 'redirects to sign in page' do
